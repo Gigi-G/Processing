@@ -6,7 +6,7 @@ float x,y,xS,yS;
 
 void setup(){
   size(500,500);
-  xS = 100;
+  xS = width/2;
   yS = height/2;
 }
 
