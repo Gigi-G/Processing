@@ -21,4 +21,7 @@ void keyPressed(){
   if(key=='n' || key=='N'){
     abs.add(new Ball(random(20,width-20),random(20,height-20),random(10,40),random(1,10),random(1,10)));
   }
+  if(key=='g' || key == 'G'){
+    abs.add(new GreenBall(random(20,width-20),random(20,height-20),random(10,40),random(1,10),random(1,10)));
+  }
 }
