@@ -1,9 +1,11 @@
-PImage Im, In3, In5, Il, IsX, Ir, Is;
+PImage Im, In3, In5, Il, IsX, Ir, Is, IsY, Inb;
 float[][] nbox3, nbox5;
 float[][] lapl = {{-1,0,-1}, {0,4,0}, {-1,0,-1}};
 float[][] sharp = {{-1,0,-1}, {0,5,0}, {-1,0,-1}};
 float[][] sobx = {{-1,-2,-1}, {0,0,0}, {1,2,1}};
 float[][] random = {{2,-2,-3}, {5,-1,0.5}, {-1,4,2}};
+float[][] SobelY = {{-1,0,1}, {-2,0,2}, {-1,0,1}};
+float[][] nbinomiale3 = {{1/16.0,2/16.0,1/16.0},{2/16.0,4/16.0,2/16.0},{1/16.0,2/16.0,1/16.0}};
 void setup(){
     nbox3 = new float[3][3];
     for(int i=0; i<3; i++){
@@ -13,22 +15,27 @@ void setup(){
     for(int i=0; i<5; i++){
       for(int j=0; j<5; j++) nbox5[i][j] = 1/25.0;
     }
-    Im = loadImage("Mussolini.jpg");
-    size(1056,1024);
+    Im = loadImage("lena.png");
+    Im.resize(256,256);
+    size(1024,512);
     Im.filter(GRAY);
+    IsY = converti(convoluzione(Im,SobelY));
     In3 = converti(convoluzione(Im,nbox3));
     In5 = converti(convoluzione(Im,nbox5));
+    Inb = converti(convoluzione(Im,nbinomiale3));
     Il = converti(convoluzione(Im,lapl));
     Is = converti(convoluzione(Im,sharp));
     IsX = converti(convoluzione(Im,sobx));
     Ir = converti(convoluzione(Im,random));
     
     image(Ir,0,0);
-    image(In5,352,0);
-    image(Il,704,0);
-    image(IsX,0,512);
-    image(In3,352,512);
-    image(Is,704,512);
+    image(In5,256,0);
+    image(Il,512,0);
+    image(IsX,768,0);
+    image(In3,0,256);
+    image(Is,256,256);
+    image(IsY,512,256);
+    image(Inb,768,256);
 }
 
 PImage converti(float[][] conv){
